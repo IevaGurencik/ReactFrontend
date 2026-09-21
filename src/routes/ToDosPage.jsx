@@ -2,6 +2,9 @@ import ToDosList from "../components/ToDosList";
 import {useOutletContext} from "react-router-dom";
 import {useEffect, useState, useRef} from "react";
 
+const isLocal = window.location.hostname === "localhost" || window.location.hostname === "13.53.116.145";
+const API_BASE = isLocal ? "http://localhost:8080" : `http://${window.location.hostname}:8080`;
+
 function ToDosPage() {
     const [todos, setTodos] = useState([]);
     const [isUploading, setIsUploading] = useState(false);
@@ -9,7 +12,7 @@ function ToDosPage() {
     const {reloadKey} = useOutletContext();
 
     const loadData = () => {
-        fetch('http://localhost:8080/api/todos', {credentials: 'include'})
+        fetch(`${API_BASE}/api/todos`, {credentials: 'include'})
             .then(res => {
                 if (!res.ok) throw new Error("Unauthorized or server error");
                 return res.json();
@@ -25,7 +28,7 @@ function ToDosPage() {
     }, [reloadKey]);
 
     const handleDelete = (id) => {
-        fetch('http://localhost:8080/api/todos/' + id, {
+        fetch(`${API_BASE}/api/todos/${id}`, {
             method: 'DELETE',
             credentials: 'include'
         })
@@ -49,7 +52,7 @@ function ToDosPage() {
         }
         formData.append('todoId', todoId);
 
-        fetch('http://localhost:8080/api/files', {
+        fetch(`${API_BASE}/api/files`, {
             method: 'POST',
             body: formData,
             credentials: 'include'
@@ -72,7 +75,7 @@ function ToDosPage() {
     };
 
     const handleDeleteFile = (fileId, todoId) => {
-        fetch(`http://localhost:8080/api/files/id/${fileId}`, {
+        fetch(`${API_BASE}/api/files/id/${fileId}`, {
             method: 'DELETE',
             credentials: 'include'
         })
