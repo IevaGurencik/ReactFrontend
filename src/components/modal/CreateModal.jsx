@@ -1,16 +1,20 @@
-import { useState } from 'react';
+import {useState} from 'react';
 import classes from './CreateModal.module.css';
 
-function CreateModal({ onClose, onCreated }) {
+const isLocal = window.location.hostname === "localhost" || window.location.hostname === "13.53.116.145";
+const API_BASE = isLocal ? "http://localhost:8080" : `http://${window.location.hostname}:8080`;
+
+function CreateModal({onClose, onCreated}) {
     const [title, setTitle] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        fetch('http://localhost:8080/api/todos', {
+
+        fetch(`${API_BASE}/api/todos`, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {'Content-Type': 'application/json'},
             credentials: 'include',
-            body: JSON.stringify({ text: title })
+            body: JSON.stringify({text: title})
         })
             .then(res => {
                 if (res.ok) {
@@ -36,7 +40,7 @@ function CreateModal({ onClose, onCreated }) {
                             required
                         />
                     </div>
-                    <div className={classes.actions} style={{ marginTop: '1rem' }}>
+                    <div className={classes.actions} style={{marginTop: '1rem'}}>
                         <button type="button" onClick={onClose}>Cancel</button>
                         <button type="submit">Save Todo</button>
                     </div>
