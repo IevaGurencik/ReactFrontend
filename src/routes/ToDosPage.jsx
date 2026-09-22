@@ -1,9 +1,7 @@
 import ToDosList from "../components/ToDosList";
 import {useOutletContext} from "react-router-dom";
 import {useEffect, useState, useRef} from "react";
-
-const isLocal = window.location.hostname === "localhost" || window.location.hostname === "13.53.116.145";
-const API_BASE = isLocal ? "http://localhost:8080" : `http://${window.location.hostname}:8080`;
+import api from "../components/api";
 
 function ToDosPage() {
     const [todos, setTodos] = useState([]);
@@ -12,13 +10,9 @@ function ToDosPage() {
     const {reloadKey} = useOutletContext();
 
     const loadData = () => {
-        fetch(`${API_BASE}/api/todos`, {credentials: 'include'})
+        api.get('/api/todos')
             .then(res => {
-                if (!res.ok) throw new Error("Unauthorized or server error");
-                return res.json();
-            })
-            .then(todosData => {
-                setTodos(todosData);
+                setTodos(res.data);
             })
             .catch(err => console.error("Fetch error:", err));
     };
@@ -28,14 +22,9 @@ function ToDosPage() {
     }, [reloadKey]);
 
     const handleDelete = (id) => {
-        fetch(`${API_BASE}/api/todos/${id}`, {
-            method: 'DELETE',
-            credentials: 'include'
-        })
-            .then(res => {
-                if (res.ok) {
-                    setTodos(prevTodos => prevTodos.filter(todo => todo.id !== id));
-                }
+        api.delete(`/api/todos/${id}`)
+            .then(() => {
+                setTodos(prevTodos => prevTodos.filter(todo => todo.id !== id));
             })
             .catch(err => console.error("Delete error:", err));
     };
@@ -52,13 +41,8 @@ function ToDosPage() {
         }
         formData.append('todoId', todoId);
 
-        fetch(`${API_BASE}/api/files`, {
-            method: 'POST',
-            body: formData,
-            credentials: 'include'
-        })
-            .then(res => {
-                if (!res.ok) throw new Error("Upload failed");
+        api.post('/api/files', formData)
+            .then(() => {
                 loadData();
                 if (fileInputRefs.current[todoId]) {
                     fileInputRefs.current[todoId].value = "";
@@ -75,22 +59,17 @@ function ToDosPage() {
     };
 
     const handleDeleteFile = (fileId, todoId) => {
-        fetch(`${API_BASE}/api/files/id/${fileId}`, {
-            method: 'DELETE',
-            credentials: 'include'
-        })
-            .then(res => {
-                if (res.ok) {
-                    setTodos(prevTodos => prevTodos.map(todo => {
-                        if (todo.id === todoId) {
-                            return {
-                                ...todo,
-                                files: todo.files.filter(file => file.id !== fileId)
-                            };
-                        }
-                        return todo;
-                    }));
-                }
+        api.delete(`/api/files/id/${fileId}`)
+            .then(() => {
+                setTodos(prevTodos => prevTodos.map(todo => {
+                    if (todo.id === todoId) {
+                        return {
+                            ...todo,
+                            files: todo.files.filter(file => file.id !== fileId)
+                        };
+                    }
+                    return todo;
+                }));
             })
             .catch(err => console.error("Error deleting file:", err));
     };

@@ -2,7 +2,10 @@ import {useState} from 'react';
 import classes from './CreateModal.module.css';
 
 const isLocal = window.location.hostname === "localhost" || window.location.hostname === "13.53.116.145";
-const API_BASE = isLocal ? "http://localhost:8080" : `http://${window.location.hostname}:8080`;
+
+const API_BASE = isLocal
+    ? "http://localhost:8080"
+    : `http://${window.location.hostname}:8080`;
 
 function CreateModal({onClose, onCreated}) {
     const [title, setTitle] = useState('');
