@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import classes from './CreateModal.module.css';
 
-const isLocal = window.location.hostname === "localhost" || window.location.hostname === "13.53.116.145";
+const isLocal = window.location.hostname === "localhost" || window.location.hostname === "13.53.42.0";
 
 const API_BASE = isLocal
     ? "http://localhost:8080"
