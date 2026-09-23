@@ -1,3 +1,4 @@
+import {API_BASE} from './api';
 import toDoClasses from './ToDo.module.css';
 
 function ToDo({
@@ -29,7 +30,7 @@ function ToDo({
                         {files.map((file) => (
                             <div key={file.id} className={toDoClasses.fileRow}>
                                 <a
-                                    href={`http://localhost:8080/api/files/id/${file.id}`}
+                                    href={`${API_BASE}/api/files/id/${file.id}`}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     download
