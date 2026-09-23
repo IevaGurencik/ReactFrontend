@@ -26,3 +26,86 @@ body {
     -moz-osx-font-smoothing: grayscale;
     -webkit-text-size-adjust: 100%;
 }
+
+.btn-upload-files {
+    background-color: #ff8a50;
+    color: #25343f;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn-upload-files:hover {
+    background-color: #ff9e73;
+}
+
+.btn-upload-files:active {
+    transform: scale(0.98);
+}
+
+.btn-upload-files:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.global-files-section {
+    background-color: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.global-files-title {
+    margin: 0 0 15px 0;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #e6ddf9;
+    letter-spacing: 0.5px;
+}
+
+.global-files-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.global-file-item {
+    background-color: #cfd8dc;
+    padding: 8px 14px;
+    border-radius: 6px;
+    max-width: 240px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.global-file-link {
+    color: #1e3d59;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.global-file-link:hover {
+    text-decoration: underline;
+    color: #112233;
+}
+
+.global-files-empty {
+    color: rgba(230, 221, 249, 0.6);
+    font-style: italic;
+    margin: 0;
+    font-size: 0.95rem;
+}

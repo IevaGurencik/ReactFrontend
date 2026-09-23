@@ -1,24 +1,34 @@
 import ToDo from './ToDo';
 import classes from './ToDosList.module.css';
 
-
-function ToDosList(params) {
-    const todos = params.todos;
-    const onDelete = params.onDelete;
-
+function ToDosList({
+                       todos,
+                       onDelete,
+                       onDeleteFile,
+                       onUploadTrigger,
+                       isUploading,
+                       fileInputRefs,
+                       handleFileChange
+                   }) {
     return (
         <>
             {todos.length > 0 && (
                 <ul className={classes.toDosList}>
                     {todos.map((toDo) => (
-                        <ToDo key={toDo.id} id={toDo.id} text={toDo.text} onDelete={onDelete}/>
+                        <ToDo
+                            key={toDo.id}
+                            id={toDo.id}
+                            text={toDo.text}
+                            files={toDo.files || []}
+                            onDelete={onDelete}
+                            onDeleteFile={onDeleteFile}
+                            onUploadTrigger={onUploadTrigger}
+                            isUploading={isUploading}
+                            fileInputRefs={fileInputRefs}
+                            handleFileChange={handleFileChange}
+                        />
                     ))}
                 </ul>
-            )}
-            {todos.length === 0 && (
-                <div style={{textAlign: 'center', color: 'white'}}>
-                    <h2>There are no To Dos yet.</h2>
-                </div>
             )}
         </>
     );

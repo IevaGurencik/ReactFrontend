@@ -30,9 +30,14 @@
     }
 }
 
+.buttonGroup {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
 .deleteButton {
     display: inline-flex;
-    margin-right: 1rem;
     padding: 0.3rem 0.8rem;
     border: none;
     border-radius: 6px;
@@ -44,4 +49,97 @@
 
 .deleteButton:hover {
     background-color: #b56e39;
+}
+
+.uploadButton {
+    display: inline-flex;
+    padding: 0.3rem 0.8rem;
+    border: none;
+    border-radius: 6px;
+    background-color: #ff9b51;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.uploadButton:hover {
+    background-color: #b56e39;
+}
+
+.uploadButton:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.files {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin: 10px 0;
+}
+
+.file {
+    display: block;
+    padding: 5px 8px;
+    background-color: #e5e9ed;
+    border-radius: 4px;
+    color: #25343f;
+    font-size: 0.9rem;
+    text-decoration: none;
+}
+
+.attachmentsTitle {
+    font-size: 1rem;
+    color: #25343f;
+    margin: 1rem 0 0.25rem 0;
+    font-weight: bold;
+}
+
+.filesContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 12px;
+}
+
+.fileRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #e9ecef;
+    border-radius: 6px;
+    padding: 8px 12px;
+}
+
+.fileLink {
+    text-decoration: none;
+    color: #333333;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 85%;
+}
+
+.inlineDeleteFileButton {
+    background: none;
+    border: none;
+    color: #dc3545;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s ease;
+}
+
+.inlineDeleteFileButton:hover {
+    color: #bd2130;
+    transform: scale(1.1);
 }
