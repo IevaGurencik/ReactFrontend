@@ -1,13 +1,8 @@
-import {useState} from 'react';
+import { useState } from 'react';
 import classes from './CreateModal.module.css';
+import { API_BASE } from '../api';
 
-const isLocal = window.location.hostname === "localhost" || window.location.hostname === "16.192.224.87";
-
-const API_BASE = isLocal
-    ? "http://localhost:8080"
-    : `http://${window.location.hostname}:8080`;
-
-function CreateModal({onClose, onCreated}) {
+function CreateModal({ onClose, onCreated }) {
     const [title, setTitle] = useState('');
 
     const handleSubmit = (e) => {
