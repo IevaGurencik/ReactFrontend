@@ -1,5 +1,5 @@
-import {API_BASE} from './api';
 import toDoClasses from './ToDo.module.css';
+import {API_BASE} from "../client/api";
 
 function ToDo({
                   id,

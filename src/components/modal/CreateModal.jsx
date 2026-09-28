@@ -1,24 +1,17 @@
 import { useState } from 'react';
 import classes from './CreateModal.module.css';
-import { API_BASE } from '../api';
+import { API_BASE } from '../../client/api';
+import axios from 'axios';
 
 function CreateModal({ onClose, onCreated }) {
     const [title, setTitle] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        fetch(`${API_BASE}/api/todos`, {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            credentials: 'include',
-            body: JSON.stringify({text: title})
-        })
-            .then(res => {
-                if (res.ok) {
-                    onCreated();
-                    onClose();
-                }
+        axios.post(`${API_BASE}/api/todos`, { title })
+            .then((res) => {
+                onCreated(res.data);
+                onClose();
             })
             .catch(err => console.error("Error creating todo:", err));
     };

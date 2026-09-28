@@ -1,7 +1,7 @@
 import ToDosList from "../components/ToDosList";
 import {useOutletContext} from "react-router-dom";
 import {useEffect, useState, useRef} from "react";
-import api from "../components/api";
+import api from "../client/api";
 
 function ToDosPage() {
     const [todos, setTodos] = useState([]);
