@@ -8,7 +8,7 @@ function CreateModal({ onClose, onCreated }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post(`${API_BASE}/api/todos`, { title })
+        axios.post(`${API_BASE}/api/todos`, { text: title }, { withCredentials: true })
             .then((res) => {
                 onCreated(res.data);
                 onClose();
